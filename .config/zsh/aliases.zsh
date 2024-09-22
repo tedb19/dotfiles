@@ -1,9 +1,10 @@
 # Bat
-alias cat="bat --theme=Coldark-Dark --paging=never"
+alias cat="bat --paging=never"
 
 # Eza
 alias ls=eza
-alias ll='eza -lah'
+alias ll='eza -lah --group-directories-first'
+alias l='eza --group-directories-first --icons'
 
 # Aliases
 alias c='clear'
@@ -17,6 +18,7 @@ alias yr="yarn run"
 alias pn="pnpm"
 alias f="find . | grep"
 alias sz="source ~/.zshrc"
+alias br="bun --bun run dev"
 
 # Git -> https://github.com/ohmyzsh/ohmyzsh/blob/master/plugins/git/git.plugin.zsh
 
@@ -55,3 +57,4 @@ alias ggpush='git push origin "$(git_current_branch)"'
 alias ggpull='git pull origin "$(git_current_branch)"'
 alias gcn!='git commit --verbose --no-edit --amend'
 alias ga='git add'
+alias gco='git checkout'

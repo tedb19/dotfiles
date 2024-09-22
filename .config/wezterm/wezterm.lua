@@ -22,16 +22,16 @@ config = {
     window_decorations = "RESIZE", -- disable title bar, but enable resizable border
     default_cursor_style = "BlinkingBar",
     -- color_scheme = "Catppuccin Mocha",
-    color_scheme = "Catppuccin Macchiato",
-    -- color_scheme = 'Tokyo Night',
+    -- color_scheme = "Catppuccin Macchiato",
+    color_scheme = 'Tokyo Night',
 
     -- font
     font = wezterm.font_with_fallback({ family = "JetBrainsMono Nerd Font Mono Propo", scale = 1.2, weight = "Bold" }),
     font_size = 16,
 
     -- background
-    window_background_opacity = 0.6,
-    macos_window_background_blur = 10,
+    window_background_opacity = 0.9,
+    macos_window_background_blur = 50,
 
     -- padding
     window_padding = {
@@ -45,16 +45,21 @@ config = {
 
     background = {
 		{
-            source = { File = wallpaper },
-            height = "Cover",
-            width = "Cover",
-            horizontal_align = "Center",
-            repeat_x = "Repeat",
-            repeat_y = "Repeat",
-            opacity = 0.95,
-            hsb = dimmer,
-            -- speed = 200,
-        }
+        source = { File = wallpaper },
+        height = "Cover",
+        width = "Cover",
+        horizontal_align = "Center",
+        repeat_x = "Repeat",
+        repeat_y = "Repeat",
+        opacity = 0.9,
+        hsb = dimmer,
+        -- speed = 200,
+    },
+    {
+      source = {Color = "black"},
+      opacity = 1,
+      hsb = dimmer,
+    }
 	}
 }
 

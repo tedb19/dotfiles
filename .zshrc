@@ -5,6 +5,7 @@ source_if_exists () {
 }
 
 source_if_exists $HOME/.config/zsh/aliases.zsh
+source_if_exists $HOME/.config/zsh/twc.zsh
 
 # Starship
 eval "$(starship init zsh)"
@@ -27,3 +28,20 @@ export NVM_DIR="$HOME/.nvm"
 
 # zoxide
 eval "$(zoxide init zsh)"
+
+# fzf
+source <(fzf --zsh)
+
+# JAVA_HOME
+export JAVA_HOME="/Library/Java/JavaVirtualMachines/amazon-corretto-17.jdk/Contents/Home"
+
+# asdf
+. /opt/homebrew/opt/asdf/libexec/asdf.sh
+
+
+# bun completions
+[ -s "/Users/teddybrian/.bun/_bun" ] && source "/Users/teddybrian/.bun/_bun"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
