@@ -11,7 +11,7 @@ local wezterm = require('wezterm')
 
 local wallpaper = os.getenv("HOME") .. "/.config/wezterm/wallpapers/sunset-tranquil-coastline.jpg"
 
-local dimmer = { brightness = 0.1 }
+local dimmer = { brightness = 0.05 }
 
 config = wezterm.config_builder()
 
@@ -26,6 +26,7 @@ config = {
     -- color_scheme = 'Tokyo Night',
 
     -- font
+    -- try JetBrainsMono Nerd Font Propo if this doesn't work
     font = wezterm.font_with_fallback({ family = "JetBrainsMono Nerd Font Mono Propo", scale = 1, weight = "Bold" }),
     font_size = 15,
 

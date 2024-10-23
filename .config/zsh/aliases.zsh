@@ -8,6 +8,7 @@ alias l='eza --group-directories-first --icons'
 
 # Aliases
 alias c='clear'
+alias ..='cd ..'
 alias o='open .'
 alias cll='clear;ls -lash'
 alias grep='grep --color=auto'
