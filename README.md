@@ -51,7 +51,7 @@ asdf plugin-add python
 asdf install python latest
 ```
 
-###### install a version
+###### set a version
 
 ```sh
 asdf global python latest
@@ -76,6 +76,10 @@ asdf install nodejs latest
 ```sh
 asdf global nodejs latest
 ```
+
+##### Elixir
+
+- see [this](https://gigalixir.com/blog/a-beginners-guide-to-installing-elixir-with-asdf/)
 
 #### Ref:
 

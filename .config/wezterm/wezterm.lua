@@ -21,14 +21,21 @@ config = {
     window_close_confirmation = "NeverPrompt",
     window_decorations = "RESIZE", -- disable title bar, but enable resizable border
     default_cursor_style = "BlinkingBar",
-    color_scheme = "Catppuccin Mocha",
+    color_scheme = "Tokyo Night",
     -- color_scheme = "Catppuccin Macchiato",
     -- color_scheme = 'Tokyo Night',
 
     -- font
     -- try JetBrainsMono Nerd Font Propo if this doesn't work
-    font = wezterm.font_with_fallback({ family = "JetBrainsMono Nerd Font Mono Propo", scale = 1, weight = "Bold" }),
-    font_size = 15,
+    font = wezterm.font_with_fallback({
+      family = "JetBrainsMono Nerd Font Mono Propo",
+      scale = 1,
+      weight = "ExtraBold",
+      stretch = "Expanded"
+     }),
+
+    font_size = 18,
+    line_height = 1.2,
 
     -- background
     -- window_background_opacity = 0.9,
