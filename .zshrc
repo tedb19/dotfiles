@@ -70,3 +70,6 @@ bindkey "^[[H" beginning-of-line                # Key Home
 bindkey "^[[F" end-of-line                      # Key End
 bindkey "^[[1;3C" forward-word                  # Key Alt + Right
 bindkey "^[[1;3D" backward-word                 # Key Alt + Left
+
+# use up/down keys to traverse the history in iex shell
+export ERL_AFLAGS="-kernel shell_history enabled"
