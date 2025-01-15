@@ -38,7 +38,6 @@ export JAVA_HOME="/Library/Java/JavaVirtualMachines/amazon-corretto-17.jdk/Conte
 # asdf
 . /opt/homebrew/opt/asdf/libexec/asdf.sh
 
-
 # bun completions
 [ -s "/Users/teddybrian/.bun/_bun" ] && source "/Users/teddybrian/.bun/_bun"
 
@@ -73,3 +72,53 @@ bindkey "^[[1;3D" backward-word                 # Key Alt + Left
 
 # use up/down keys to traverse the history in iex shell
 export ERL_AFLAGS="-kernel shell_history enabled"
+
+# NAVIGATION
+# ----------
+
+# Navigate to directory by name without using cd
+setopt AUTO_CD
+
+# Automatically push directories to the stack when cd'ing
+setopt AUTO_PUSHD
+
+# Don't store duplicates on the stack
+setopt PUSHD_IGNORE_DUPS
+
+# Swap the meaning of cd +1 and cd -1
+setopt PUSHD_MINUS
+
+# Don't print the directory stack when pushing or popping
+setopt PUSHD_SILENT
+
+# sesh:
+# ------
+function sesh-sessions() {
+  {
+    exec </dev/tty
+    exec <&1
+    local session
+    # session=$(sesh list -t -c | fzf --height 40% --reverse --border-label ' sesh ' --border --prompt '⚡  ')
+    session=$(sesh list -t -c | gum filter --limit 1 --no-sort --fuzzy --placeholder 'Pick a session' --height 50 --prompt='⚡')
+
+    zle reset-prompt > /dev/null 2>&1 || true
+    [[ -z "$session" ]] && return
+    sesh connect $session
+  }
+}
+
+# Alt-s to open fzf prompt to connect to session
+zle     -N             sesh-sessions
+bindkey -M emacs '\es' sesh-sessions
+bindkey -M vicmd '\es' sesh-sessions
+bindkey -M viins '\es' sesh-sessions
+
+# use y for yazi, and change directory when you exit with "q". Press "Q" not to change directory
+function y() {
+	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
+	yazi "$@" --cwd-file="$tmp"
+	if cwd="$(command cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
+		builtin cd -- "$cwd"
+	fi
+	rm -f -- "$tmp"
+}

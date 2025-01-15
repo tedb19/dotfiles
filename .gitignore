@@ -2,3 +2,14 @@ raycast
 node_modules
 twc.zsh
 .vscode
+
+tags
+test.sh
+.luarc.json
+
+bpell/
+lazy-lock.json
+
+.DS_Store
+.config/tmux/plugins
+.git
