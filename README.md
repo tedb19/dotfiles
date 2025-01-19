@@ -32,7 +32,7 @@
   - These could be added to a txt file, and run with:
 
   ```sh
-  xargs brew install < apps.txt
+  xargs brew install < brew-packages.txt
   ```
 
 - Run `bat cache --build` to refresh bat's cache.
