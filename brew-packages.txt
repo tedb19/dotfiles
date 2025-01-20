@@ -16,3 +16,10 @@ zoxide
 imagemagick
 font-symbols-only-nerd-font
 yq
+stow
+starship
+eza
+bat
+zsh-autosuggestions
+zsh-syntax-highlighting
+asdf
