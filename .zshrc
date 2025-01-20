@@ -91,6 +91,11 @@ setopt PUSHD_MINUS
 # Don't print the directory stack when pushing or popping
 setopt PUSHD_SILENT
 
+# tmuxifier
+export PATH="$HOME/.tmuxifier/bin:$PATH"
+eval "$(tmuxifier init -)"
+export EDITOR=nvim
+
 # sesh:
 # ------
 function sesh-sessions() {

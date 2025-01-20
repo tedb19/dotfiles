@@ -982,6 +982,7 @@ require('lazy').setup({
   require 'kickstart.plugins.auto-save',
   require 'kickstart.plugins.nvim-tmux-navigator',
   require 'kickstart.plugins.lazygit',
+  require 'kickstart.plugins.oil',
 
   -- NOTE: The import below can automatically add your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
   --    This is the easiest way to modularize your config.

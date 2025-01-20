@@ -1,4 +1,6 @@
-### Managed by Stow:
+# Dotfiles
+
+## Managed by Stow
 
 - On updating the dotfiles, run:
 
@@ -6,12 +8,12 @@
  stow .
 ```
 
-#### TODO:
+### TODO
 
 - [ ] setup neovim
 - [ ] add shell script for a fresh installation
 
-##### Notes on fresh installations:
+#### Notes on fresh installations
 
 - add all the deps with `brew`, i.e.:
 
@@ -55,9 +57,17 @@ asdf install nodejs latest
 asdf global nodejs latest
 ```
 
-##### Elixir
+##### Elixir (Erlang is a prereq)
 
-- see [this](https://gigalixir.com/blog/a-beginners-guide-to-installing-elixir-with-asdf/)
+```sh
+asdf plugin add erlang https://github.com/asdf-vm/asdf-erlang.git
+asdf install erlang latest
+asdf global erlang latest
+
+asdf plugin add elixir https://github.com/asdf-vm/asdf-elixir.git
+asdf install elixir latest
+asdf global elixir latest
+```
 
 ##### Lua
 
@@ -67,6 +77,10 @@ asdf install lua latest
 asdf global lua latest
 ```
 
-#### Ref:
+#### Ref
 
 - [Dreams of Autonomy](https://www.youtube.com/watch?v=y6XCebnB9gs)
+
+##### TODOS
+
+- [ ] Add docs/backups for **tmuxifier shell scripts**
