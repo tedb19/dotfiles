@@ -34,7 +34,7 @@ config = {
 		stretch = "Expanded",
 	}),
 
-	font_size = 22,
+	font_size = 18,
 	line_height = 1.2,
 
 	-- background

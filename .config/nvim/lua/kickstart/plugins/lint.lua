@@ -12,7 +12,7 @@ return {
         typescriptreact = { 'eslint_d' },
         javascriptreact = { 'eslint_d' },
         python = { 'flake8' },
-        elixir = { 'elixirls' },
+        -- elixir = { 'elixirls' },
       }
 
       -- To allow other plugins to add linters to require('lint').linters_by_ft,

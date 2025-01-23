@@ -160,6 +160,22 @@ vim.opt.scrolloff = 10
 -- [[ Basic Keymaps ]]
 --  See `:help vim.keymap.set()`
 
+-- Terminal keymaps
+vim.keymap.set('n', 't', function()
+  vim.cmd 'belowright 12split'
+  vim.cmd 'set winfixheight'
+  vim.cmd 'term'
+  vim.cmd 'startinsert'
+end)
+
+-- keep things highlighted after indenting
+vim.keymap.set('v', '>', '>gv')
+vim.keymap.set('v', '<', '<gv')
+
+-- move things up and down in visual mode
+vim.keymap.set('v', 'J', ":m '>+1<CR>gv=gv")
+vim.keymap.set('v', 'K', ":m '<-2<CR>gv=gv")
+
 -- Clear highlights on search when pressing <Esc> in normal mode
 --  See `:help hlsearch`
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')

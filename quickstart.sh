@@ -18,6 +18,9 @@ bat cache --build
 brew tap arl/arl
 brew install gitmux
 
+# May need to rethink this
+brew services start postgresql@17
+
 # asdf python
 asdf plugin-add python
 asdf install python latest
