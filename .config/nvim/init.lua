@@ -161,6 +161,7 @@ vim.opt.scrolloff = 10
 --  See `:help vim.keymap.set()`
 
 -- Terminal keymaps
+-- <C-d> to kill the terminal
 vim.keymap.set('n', 't', function()
   vim.cmd 'belowright 12split'
   vim.cmd 'set winfixheight'
@@ -217,6 +218,16 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   group = vim.api.nvim_create_augroup('kickstart-highlight-yank', { clear = true }),
   callback = function()
     vim.highlight.on_yank()
+  end,
+})
+
+-- set options on terminal
+vim.api.nvim_create_autocmd('TermOpen', {
+  desc = 'Set custom options for Terminal mode',
+  group = vim.api.nvim_create_augroup('custom-term-open', { clear = true }),
+  callback = function()
+    vim.opt.number = false
+    vim.opt.relativenumber = false
   end,
 })
 
