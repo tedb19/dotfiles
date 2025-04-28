@@ -5,7 +5,7 @@ source_if_exists () {
 }
 
 source_if_exists $HOME/.config/zsh/aliases.zsh
-source_if_exists $HOME/.config/zsh/twc.zsh
+source_if_exists $HOME/.config/zsh/phare.zsh
 
 # Starship
 eval "$(starship init zsh)"

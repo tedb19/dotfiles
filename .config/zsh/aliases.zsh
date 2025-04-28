@@ -60,6 +60,9 @@ function git_current_branch() {
 alias gl="git log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --branches"
 # alias gl="git log --graph --pretty=format:'%C(yellow)%s%Creset%n%an %C(blue)%cr%Creset %h%C(red)%d%Creset ' --numstat"
 alias gcmsg='git commit --message'
+alias gc!='git commit --verbose --amend'
+alias gcn='git commit --verbose --no-edit'
+alias gcn!='git commit --verbose --no-edit --amend'
 alias gss='git status --short'
 alias gra='git remote add'
 alias ggpush='git push origin "$(git_current_branch)"'
