@@ -6,6 +6,7 @@ source_if_exists () {
 
 source_if_exists $HOME/.config/zsh/aliases.zsh
 source_if_exists $HOME/.config/zsh/git-workflows.zsh
+source_if_exists $HOME/.config/zsh/command-help.zsh
 
 # Starship
 eval "$(starship init zsh)"

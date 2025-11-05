@@ -3,7 +3,7 @@
 # Git Worktree & Branch Workflows with Gum
 # Interactive git worktree and branch management using gum and fzf
 
-# Initialize .trees folder in current git repository
+# @help: Git Workflows | gwi | Initialize .trees folder in git repository | gwi | gwi
 function gwi() {
   if ! git rev-parse --is-inside-work-tree &>/dev/null; then
     gum style --foreground 196 "Not in a git repository"
@@ -29,7 +29,7 @@ function gwi() {
   fi
 }
 
-# Switch to existing worktree
+# @help: Git Workflows | gw | Switch to existing worktree using fzf | gw | gw
 function gw() {
   if ! git rev-parse --is-inside-work-tree &>/dev/null; then
     gum style --foreground 196 "Not in a git repository"
@@ -73,7 +73,7 @@ function gw() {
   fi
 }
 
-# Create new worktree
+# @help: Git Workflows | gwn | Create new worktree in .trees/ folder | gwn [branch-name] | gwn feature-auth
 function gwn() {
   if ! git rev-parse --is-inside-work-tree &>/dev/null; then
     gum style --foreground 196 "Not in a git repository"
@@ -160,7 +160,7 @@ function gwn() {
   fi
 }
 
-# Worktree manager menu
+# @help: Git Workflows | gwm | Interactive worktree manager menu | gwm | gwm
 function gwm() {
   if ! git rev-parse --is-inside-work-tree &>/dev/null; then
     gum style --foreground 196 "Not in a git repository"
@@ -265,7 +265,7 @@ function gwm() {
   esac
 }
 
-# Enhanced branch checkout with fzf
+# @help: Git Workflows | gbc | Enhanced branch checkout with fzf and git log preview | gbc | gbc
 function gbc() {
   if ! git rev-parse --is-inside-work-tree &>/dev/null; then
     gum style --foreground 196 "Not in a git repository"
@@ -293,7 +293,7 @@ function gbc() {
   fi
 }
 
-# Quick worktree status - shows all worktrees with their status
+# @help: Git Workflows | gws | Show quick status of all worktrees | gws | gws
 function gws() {
   if ! git rev-parse --is-inside-work-tree &>/dev/null; then
     gum style --foreground 196 "Not in a git repository"
