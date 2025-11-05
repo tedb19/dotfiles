@@ -1,7 +1,7 @@
 pnpm
 yazi
 ffmpeg
-sevenzip
+p7zip
 jq
 poppler
 fd

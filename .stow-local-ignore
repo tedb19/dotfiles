@@ -1,3 +1,8 @@
 .git
 .gitignore
 .DS_Store
+.trees
+README.md
+quickstart.sh
+brew-packages.txt
+.stow-local-ignore

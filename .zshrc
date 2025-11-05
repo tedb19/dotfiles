@@ -28,21 +28,18 @@ eval "$(zoxide init zsh)"
 # fzf
 source <(fzf --zsh)
 
-# JAVA_HOME
-export JAVA_HOME="/Library/Java/JavaVirtualMachines/amazon-corretto-17.jdk/Contents/Home"
-
 # asdf
 . /opt/homebrew/opt/asdf/libexec/asdf.sh
 
 # bun completions
-[ -s "/Users/teddybrian/.bun/_bun" ] && source "/Users/teddybrian/.bun/_bun"
+[ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
 
 # bun
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
 
 # pnpm
-export PNPM_HOME="/Users/teddybrian/Library/pnpm"
+export PNPM_HOME="$HOME/Library/pnpm"
 case ":$PATH:" in
   *":$PNPM_HOME:"*) ;;
   *) export PATH="$PNPM_HOME:$PATH" ;;
