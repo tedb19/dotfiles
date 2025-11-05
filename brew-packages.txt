@@ -1,9 +1,4 @@
-neovim
-tmux
-gum
-lazygit
 pnpm
-sesh
 yazi
 ffmpeg
 sevenzip
@@ -14,7 +9,6 @@ ripgrep
 fzf
 zoxide
 imagemagick
-font-symbols-only-nerd-font
 yq
 stow
 starship
@@ -23,3 +17,9 @@ bat
 zsh-autosuggestions
 zsh-syntax-highlighting
 asdf
+gh
+tree
+terraform
+gnupg
+gum
+awscli

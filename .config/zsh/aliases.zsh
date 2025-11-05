@@ -6,10 +6,6 @@ alias ls=eza
 alias ll='eza -lah --group-directories-first'
 alias l='eza --group-directories-first --icons'
 
-# tmux
-alias tmux="tmux -2"
-alias t="tmux -2"
-
 # Aliases
 alias c='clear'
 alias o='open .'
@@ -22,7 +18,6 @@ alias pn="pnpm"
 alias f="find . | grep"
 alias sz="source ~/.zshrc"
 alias br="bun --bun run dev"
-alias n="nvim"
 
 # For convenience
 alias ..="cd .."

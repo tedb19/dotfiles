@@ -5,7 +5,7 @@ source_if_exists () {
 }
 
 source_if_exists $HOME/.config/zsh/aliases.zsh
-source_if_exists $HOME/.config/zsh/phare.zsh
+source_if_exists $HOME/.config/zsh/git-workflows.zsh
 
 # Starship
 eval "$(starship init zsh)"
@@ -20,11 +20,6 @@ ZSH_HIGHLIGHT_STYLES[path_prefix]=none
 
 # Activate autosuggestions
 source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-
-# nvm
-export NVM_DIR="$HOME/.nvm"
-  [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
-  [ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" # This loads nvm bash_completion
 
 # zoxide
 eval "$(zoxide init zsh)"
@@ -91,32 +86,7 @@ setopt PUSHD_MINUS
 # Don't print the directory stack when pushing or popping
 setopt PUSHD_SILENT
 
-# tmuxifier
-export PATH="$HOME/.tmuxifier/bin:$PATH"
-eval "$(tmuxifier init -)"
-export EDITOR=nvim
-
-# sesh:
-# ------
-function sesh-sessions() {
-  {
-    exec </dev/tty
-    exec <&1
-    local session
-    # session=$(sesh list -t -c | fzf --height 40% --reverse --border-label ' sesh ' --border --prompt '⚡  ')
-    session=$(sesh list -t -c | gum filter --limit 1 --no-sort --fuzzy --placeholder 'Pick a session' --height 50 --prompt='⚡')
-
-    zle reset-prompt > /dev/null 2>&1 || true
-    [[ -z "$session" ]] && return
-    sesh connect $session
-  }
-}
-
-# Alt-s to open fzf prompt to connect to session
-zle     -N             sesh-sessions
-bindkey -M emacs '\es' sesh-sessions
-bindkey -M vicmd '\es' sesh-sessions
-bindkey -M viins '\es' sesh-sessions
+export EDITOR=code
 
 # use y for yazi, and change directory when you exit with "q". Press "Q" not to change directory
 function y() {
@@ -128,5 +98,4 @@ function y() {
 	rm -f -- "$tmp"
 }
 
-export PATH="/opt/homebrew/opt/postgresql@17/bin:$PATH"
-
+[[ "$TERM_PROGRAM" == "kiro" ]] && . "$(kiro --locate-shell-integration-path zsh)"

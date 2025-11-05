@@ -3,25 +3,21 @@
 xargs brew install < brew-packages.txt
 
 brew install --cask font-jetbrains-mono-nerd-font
+brew install --cask font-symbols-only-nerd-font
 brew install --cask wezterm
 brew install --cask spotify
 brew install --cask obsidian
 brew install --cask visual-studio-code
 brew install --cask fantastical
+brew install --cask brave-browser
+brew install --cask whatsapp
+brew install --cask vlc
+brew install --cask screen-studio
 
 stow .
 
-# Install Tmux Plugin Manager
-git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
-
 # Make bat adopt the new theme
 bat cache --build
-
-brew tap arl/arl
-brew install gitmux
-
-# May need to rethink this
-brew services start postgresql@17
 
 # asdf python
 asdf plugin-add python
