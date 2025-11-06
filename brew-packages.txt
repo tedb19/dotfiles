@@ -1,15 +1,9 @@
 pnpm
 yazi
-ffmpeg
-p7zip
-jq
-poppler
 fd
 ripgrep
 fzf
 zoxide
-imagemagick
-yq
 stow
 starship
 eza
@@ -18,7 +12,6 @@ zsh-autosuggestions
 zsh-syntax-highlighting
 asdf
 gh
-tree
 terraform
 gnupg
 gum
