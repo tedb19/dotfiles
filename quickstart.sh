@@ -43,35 +43,35 @@ echo "🔧 Setting up asdf..."
 echo "🐍 Installing Python via asdf..."
 asdf plugin add python
 asdf install python latest
-asdf set python latest
+asdf set -u python latest
 
 # asdf nodejs
 echo "📗 Installing Node.js via asdf..."
 asdf plugin add nodejs https://github.com/asdf-vm/asdf-nodejs.git
 asdf install nodejs latest
-asdf set nodejs latest
+asdf set -u nodejs latest
 
 # asdf Elixir (Erlang is a prerequisite)
 echo "💧 Installing Erlang and Elixir via asdf..."
 asdf plugin add erlang https://github.com/asdf-vm/asdf-erlang.git
 asdf install erlang latest
-asdf set erlang latest
+asdf set -u erlang latest
 
 asdf plugin add elixir https://github.com/asdf-vm/asdf-elixir.git
 asdf install elixir latest
-asdf set elixir latest
+asdf set -u elixir latest
 
 # asdf lua
 echo "🌙 Installing Lua via asdf..."
 asdf plugin add lua https://github.com/Stratus3D/asdf-lua.git
 asdf install lua latest
-asdf set lua latest
+asdf set -u lua latest
 
 # asdf golang
 echo "🐹 Installing Go via asdf..."
 asdf plugin add golang https://github.com/asdf-community/asdf-golang.git
 asdf install golang latest
-asdf set golang latest
+asdf set -u golang latest
 
 # Install bun
 echo "🥟 Installing bun..."
