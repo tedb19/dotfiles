@@ -41,7 +41,7 @@ echo "🔧 Setting up asdf..."
 
 # asdf python
 echo "🐍 Installing Python via asdf..."
-asdf plugin-add python
+asdf plugin add python
 asdf install python latest
 asdf global python latest
 
@@ -63,13 +63,13 @@ asdf global elixir latest
 
 # asdf lua
 echo "🌙 Installing Lua via asdf..."
-asdf plugin-add lua https://github.com/Stratus3D/asdf-lua.git
+asdf plugin add lua https://github.com/Stratus3D/asdf-lua.git
 asdf install lua latest
 asdf global lua latest
 
 # asdf golang
 echo "🐹 Installing Go via asdf..."
-asdf plugin-add golang https://github.com/asdf-community/asdf-golang.git
+asdf plugin add golang https://github.com/asdf-community/asdf-golang.git
 asdf install golang latest
 asdf global golang latest
 
