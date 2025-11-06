@@ -29,7 +29,8 @@ brew install --cask vlc
 brew install --cask screen-studio
 
 echo "🔗 Creating symlinks with stow..."
-stow .
+cd "$(dirname "$0")"
+stow -t ~ .
 
 echo "🦇 Building bat cache..."
 bat cache --build

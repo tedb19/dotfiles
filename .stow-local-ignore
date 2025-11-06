@@ -4,5 +4,6 @@
 .trees
 README.md
 quickstart.sh
+sync.sh
 brew-packages.txt
 .stow-local-ignore
