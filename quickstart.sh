@@ -27,6 +27,11 @@ brew install --cask brave-browser
 brew install --cask whatsapp
 brew install --cask vlc
 brew install --cask screen-studio
+brew install --cask claude-code
+
+echo "🍺 Setting up brew autoupdate..."
+brew tap homebrew/autoupdate
+brew autoupdate start --upgrade --cleanup --greedy
 
 echo "🔗 Creating symlinks with stow..."
 cd "$(dirname "$0")"
