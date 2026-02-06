@@ -50,6 +50,21 @@ config = {
 	},
 
 	native_macos_fullscreen_mode = true,
+
+	keys = {
+		-- CMD+Left: go to start of line (Ctrl+A)
+		{ key = "LeftArrow", mods = "SUPER", action = wezterm.action.SendKey({ key = "a", mods = "CTRL" }) },
+		-- CMD+Right: go to end of line (Ctrl+E)
+		{ key = "RightArrow", mods = "SUPER", action = wezterm.action.SendKey({ key = "e", mods = "CTRL" }) },
+		-- OPT+Left: move back one word (ESC b)
+		{ key = "LeftArrow", mods = "OPT", action = wezterm.action.SendString("\x1bb") },
+		-- OPT+Right: move forward one word (ESC f)
+		{ key = "RightArrow", mods = "OPT", action = wezterm.action.SendString("\x1bf") },
+		-- SHIFT+CMD+Backspace: delete entire line to left (Ctrl+U)
+		{ key = "Backspace", mods = "SHIFT|SUPER", action = wezterm.action.SendKey({ key = "u", mods = "CTRL" }) },
+		-- SHIFT+OPT+Backspace: delete word backward (Ctrl+W)
+		{ key = "Backspace", mods = "SHIFT|OPT", action = wezterm.action.SendKey({ key = "w", mods = "CTRL" }) },
+	},
 }
 
 return config
