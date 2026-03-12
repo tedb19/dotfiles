@@ -57,6 +57,8 @@ config = {
 		{ key = "Backspace", mods = "SHIFT|SUPER", action = wezterm.action.SendKey({ key = "u", mods = "CTRL" }) },
 		-- SHIFT+OPT+Backspace: delete word backward (Ctrl+W)
 		{ key = "Backspace", mods = "SHIFT|OPT", action = wezterm.action.SendKey({ key = "w", mods = "CTRL" }) },
+		-- SHIFT+Enter: send CSI u sequence so apps (e.g. Claude Code) can distinguish Shift+Enter
+		{ key = "Enter", mods = "SHIFT", action = wezterm.action.SendString("\x1b[13;2u") },
 
 		-- ═══ Pane splitting ═══
 		-- Ctrl+Shift+\ : split horizontal (side by side)
