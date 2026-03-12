@@ -6,6 +6,11 @@ twc.zsh
 tags
 test.sh
 
-.DS_Store
+**/.DS_Store
+
+# Auto-generated tool files
+.config/cagent/
+.config/uv/uv-receipt.json
+.config/fish/
 .git
 .trees/
