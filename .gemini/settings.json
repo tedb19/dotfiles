@@ -1,0 +1,19 @@
+{
+  "general": {
+    "previewFeatures": true
+  },
+  "ui": {
+    "showStatusInTitle": true
+  },
+  "tools": {
+    "autoAccept": true
+  },
+  "security": {
+    "folderTrust": {
+      "enabled": true
+    }
+  },
+  "ide": {
+    "enabled": true
+  }
+}
