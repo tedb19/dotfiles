@@ -9,10 +9,6 @@
 -- https://wezfurlong.org/wezterm/
 local wezterm = require("wezterm")
 
--- local wallpaper = os.getenv("HOME") .. "/.config/wezterm/wallpapers/sunset-fantasy-art.jpg"
-
--- local dimmer = { brightness = 0.05 }
-
 local config = wezterm.config_builder()
 
 config = {
@@ -37,10 +33,6 @@ config = {
 	font_size = 14,
 	line_height = 1.2,
 
-	-- background
-	-- window_background_opacity = 0.11
-	-- macos_window_background_blur = 50,
-
 	-- padding
 	window_padding = {
 		left = 30,
@@ -52,6 +44,7 @@ config = {
 	native_macos_fullscreen_mode = true,
 
 	keys = {
+		-- ═══ Line editing ═══
 		-- CMD+Left: go to start of line (Ctrl+A)
 		{ key = "LeftArrow", mods = "SUPER", action = wezterm.action.SendKey({ key = "a", mods = "CTRL" }) },
 		-- CMD+Right: go to end of line (Ctrl+E)
@@ -64,6 +57,30 @@ config = {
 		{ key = "Backspace", mods = "SHIFT|SUPER", action = wezterm.action.SendKey({ key = "u", mods = "CTRL" }) },
 		-- SHIFT+OPT+Backspace: delete word backward (Ctrl+W)
 		{ key = "Backspace", mods = "SHIFT|OPT", action = wezterm.action.SendKey({ key = "w", mods = "CTRL" }) },
+
+		-- ═══ Pane splitting ═══
+		-- Ctrl+Shift+\ : split horizontal (side by side)
+		{ key = "\\", mods = "CMD|SHIFT", action = wezterm.action.SplitHorizontal({ domain = "CurrentPaneDomain" }) },
+		-- Ctrl+Shift+- : split vertical (top/bottom)
+		{ key = "-", mods = "CMD|SHIFT", action = wezterm.action.SplitVertical({ domain = "CurrentPaneDomain" }) },
+
+		-- ═══ Pane navigation ═══
+		{ key = "LeftArrow", mods = "CMD|SHIFT", action = wezterm.action.ActivatePaneDirection("Left") },
+		{ key = "RightArrow", mods = "CMD|SHIFT", action = wezterm.action.ActivatePaneDirection("Right") },
+		{ key = "UpArrow", mods = "CMD|SHIFT", action = wezterm.action.ActivatePaneDirection("Up") },
+		{ key = "DownArrow", mods = "CMD|SHIFT", action = wezterm.action.ActivatePaneDirection("Down") },
+
+		-- ═══ Pane resize (vim-style) ═══
+		{ key = "h", mods = "CMD|SHIFT", action = wezterm.action.AdjustPaneSize({ "Left", 5 }) },
+		{ key = "l", mods = "CMD|SHIFT", action = wezterm.action.AdjustPaneSize({ "Right", 5 }) },
+		{ key = "k", mods = "CMD|SHIFT", action = wezterm.action.AdjustPaneSize({ "Up", 5 }) },
+		{ key = "j", mods = "CMD|SHIFT", action = wezterm.action.AdjustPaneSize({ "Down", 5 }) },
+
+		-- ═══ Pane management ═══
+		-- Ctrl+Shift+Z : toggle zoom (fullscreen a pane, press again to restore)
+		{ key = "z", mods = "CMD|SHIFT", action = wezterm.action.TogglePaneZoomState },
+		-- Ctrl+Shift+W : close current pane
+		{ key = "w", mods = "CMD|SHIFT", action = wezterm.action.CloseCurrentPane({ confirm = true }) },
 	},
 }
 
