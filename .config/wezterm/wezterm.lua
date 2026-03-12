@@ -17,8 +17,8 @@ config = {
 	window_close_confirmation = "NeverPrompt",
 	window_decorations = "RESIZE", -- disable title bar, but enable resizable border
 	default_cursor_style = "BlinkingBar",
-	color_scheme = "Tokyo Night",
-	-- color_scheme = "Catppuccin Mocha (Gogh)",
+	-- color_scheme = "Tokyo Night",
+	color_scheme = "Catppuccin Mocha (Gogh)",
 	-- color_scheme = 'Tokyo Night',
 
 	-- font
@@ -28,10 +28,11 @@ config = {
 		scale = 1,
 		weight = "ExtraBold",
 		stretch = "Expanded",
+		cell_width = 2,
 	}),
 
-	font_size = 14,
-	line_height = 1.2,
+	font_size = 16,
+	line_height = 1.5,
 
 	-- padding
 	window_padding = {
