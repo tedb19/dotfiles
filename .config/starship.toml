@@ -8,6 +8,8 @@
 # https://starship.rs
 
 format = """
+$username\
+$hostname\
 $directory\
 $git_branch\
 $git_status\
@@ -30,6 +32,16 @@ $character"""
 palette = "catppuccin_macchiato"
 
 add_newline = true
+
+[username]
+show_always = false
+style_user = 'bold flamingo'
+format = '[$user]($style)'
+
+[hostname]
+ssh_only = true
+style = 'bold yellow'
+format = '[@$hostname](bold yellow) '
 
 [directory]
 style = 'bold lavender'
