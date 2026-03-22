@@ -8,6 +8,9 @@ test.sh
 
 **/.DS_Store
 
+# Sensitive files
+.config/gh/hosts.yml
+
 # Auto-generated tool files
 .config/cagent/
 .config/uv/uv-receipt.json
