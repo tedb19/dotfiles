@@ -24,8 +24,8 @@ config.front_end = "WebGpu"
 config.webgpu_power_preference = "HighPerformance"
 
 -- font
-config.font = wezterm.font("JetBrainsMono Nerd Font Mono", { weight = "ExtraBold" })
-config.font_size = 16
+config.font = wezterm.font("JetBrainsMono Nerd Font Mono", { weight = "Medium" })
+config.font_size = 14
 config.line_height = 1.5
 
 -- scrollback
