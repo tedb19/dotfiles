@@ -18,6 +18,12 @@ config.window_close_confirmation = "NeverPrompt"
 config.window_decorations = "RESIZE" -- disable title bar, but enable resizable border
 config.default_cursor_style = "BlinkingBar"
 config.color_scheme = "Catppuccin Mocha (Gogh)"
+config.audible_bell = "Disabled"
+config.visual_bell = {
+	fade_in_duration_ms = 75,
+	fade_out_duration_ms = 75,
+	target = "CursorColor",
+}
 
 -- GPU rendering
 config.front_end = "WebGpu"
