@@ -19,6 +19,7 @@ echo "📦 Installing cask applications..."
 brew install --cask --adopt font-jetbrains-mono-nerd-font || true
 brew install --cask --adopt font-symbols-only-nerd-font || true
 brew install --cask --adopt wezterm || true
+brew install --cask --adopt ghostty || true
 brew install --cask --adopt spotify || true
 brew install --cask --adopt obsidian || true
 brew install --cask --adopt visual-studio-code || true
