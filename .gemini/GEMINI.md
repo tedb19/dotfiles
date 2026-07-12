@@ -1,0 +1,1 @@
+../.config/agent-rules/global-engineering.md
