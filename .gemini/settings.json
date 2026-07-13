@@ -1,19 +1,14 @@
 {
-  "general": {
-    "previewFeatures": true
-  },
-  "ui": {
-    "showStatusInTitle": true
-  },
-  "tools": {
-    "autoAccept": true
+  "ide": {
+    "enabled": true,
+    "hasSeenNudge": true
   },
   "security": {
-    "folderTrust": {
-      "enabled": true
+    "auth": {
+      "selectedType": "oauth-personal"
     }
   },
-  "ide": {
-    "enabled": true
+  "general": {
+    "previewFeatures": true
   }
 }
