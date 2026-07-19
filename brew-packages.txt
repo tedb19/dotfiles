@@ -16,3 +16,4 @@ terraform
 gnupg
 gum
 awscli
+herdr
