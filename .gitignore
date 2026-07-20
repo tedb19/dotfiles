@@ -11,6 +11,11 @@ test.sh
 # Sensitive files
 .config/gh/hosts.yml
 
+# Herdr runtime files
+.config/herdr/*.log
+.config/herdr/*.sock
+.config/herdr/session.json
+
 # Auto-generated tool files
 .config/cagent/
 .config/uv/uv-receipt.json
