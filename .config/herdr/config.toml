@@ -1,0 +1,31 @@
+# herdr — terminal multiplexer for AI coding agents (https://herdr.dev)
+# Stow-managed: symlinked to ~/.config/herdr/config.toml
+# Only non-default settings are set here; run `herdr --default-config` for the full reference.
+
+[theme]
+# Catppuccin Mocha — matches Ghostty/WezTerm.
+name = "catppuccin"
+
+[keys]
+# Prefix is ctrl+b (herdr default). Press-and-release, then the next key is a herdr command.
+# Pane keys below mirror the Ghostty/WezTerm super+shift bindings as closely as a prefix TUI allows.
+
+# Splits — match terminal keys (\ = split right, - = split down)
+split_vertical   = "prefix+backslash"   # side-by-side / split right (default was prefix+v)
+split_horizontal = "prefix+minus"       # stacked / split down (herdr default)
+
+# Focus panes — arrows, matching super+shift+arrows (default was h/j/k/l)
+focus_pane_left  = "prefix+left"
+focus_pane_down  = "prefix+down"
+focus_pane_up    = "prefix+up"
+focus_pane_right = "prefix+right"
+
+# Kept at herdr defaults (documented here for reference; muscle-memory notes in comments):
+#   zoom            = "prefix+z"   # matches super+shift+z
+#   resize_mode     = "prefix+r"   # enter resize mode, then h/j/k/l or arrows resize (super+shift+hjkl equivalent)
+#   close_pane      = "prefix+x"   # (current terminal used w; w is workspace_picker here)
+#   workspace_picker= "prefix+w"   # switch project/agent — kept prime for multi-project flow
+#   goto            = "prefix+g"   # jump picker
+#   new_tab         = "prefix+c"
+#   detach          = "prefix+q"   # agents keep running after detach
+#   toggle_sidebar  = "prefix+b"

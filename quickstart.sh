@@ -38,6 +38,11 @@ echo "🔗 Creating symlinks with stow..."
 cd "$(dirname "$0")"
 stow -t ~ .
 
+# herdr agent-state integrations (per-machine: claude hooks live outside the stow tree)
+echo "🐾 Installing herdr agent integrations..."
+herdr integration install claude   || true
+herdr integration install opencode || true
+
 echo "🦇 Building bat cache..."
 bat cache --build
 
@@ -82,6 +87,13 @@ asdf set -u golang latest
 # Install bun
 echo "🥟 Installing bun..."
 curl -fsSL https://bun.sh/install | bash
+
+# herdr agent skill — teaches agents to drive herdr's socket API from inside a pane.
+# Needs node (from asdf above); lands in ~/.agents/skills, symlinked into ~/.claude/skills (outside stow tree).
+echo "🐾 Installing herdr agent skill..."
+npx -y skills add ogulcancelik/herdr --skill herdr -g || true
+# Installer vendors the whole herdr repo; agents only need SKILL.md.
+find ~/.agents/skills/herdr -mindepth 1 -maxdepth 1 ! -name SKILL.md -exec rm -rf {} + 2>/dev/null || true
 
 echo ""
 echo "✅ Setup complete!"
