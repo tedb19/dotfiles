@@ -19,6 +19,9 @@ alias f="find . | grep"
 alias sz="source ~/.zshrc"
 alias br="bun --bun run dev"
 
+# @help: Herdr | h | Launch herdr terminal multiplexer for coding agents | h <args> | h
+alias h='herdr'
+
 # For convenience
 alias ..="cd .."
 alias ...='cd ../..'
