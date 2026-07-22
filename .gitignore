@@ -15,6 +15,11 @@ test.sh
 .config/herdr/*.log
 .config/herdr/*.sock
 .config/herdr/session.json
+.config/herdr/release-notes.json
+
+# Karabiner auto-generated
+.config/karabiner/assets/
+.config/karabiner/automatic_backups/
 
 # Auto-generated tool files
 .config/cagent/

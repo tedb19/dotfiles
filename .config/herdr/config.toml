@@ -7,7 +7,8 @@
 name = "catppuccin"
 
 [keys]
-# Prefix is ctrl+b (herdr default). Press-and-release, then the next key is a herdr command.
+# Prefix is F18 (Caps Lock remapped to F18 via Karabiner). Press-and-release, then the next key is a herdr command.
+prefix = "f18"
 # Pane keys below mirror the Ghostty/WezTerm super+shift bindings as closely as a prefix TUI allows.
 
 # Splits — match terminal keys (\ = split right, - = split down)
