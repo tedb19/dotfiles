@@ -18,7 +18,6 @@ xargs brew install < brew-packages.txt
 echo "📦 Installing cask applications..."
 brew install --cask --adopt font-jetbrains-mono-nerd-font || true
 brew install --cask --adopt font-symbols-only-nerd-font || true
-brew install --cask --adopt wezterm || true
 brew install --cask --adopt ghostty || true
 brew install --cask --adopt spotify || true
 brew install --cask --adopt obsidian || true
@@ -29,6 +28,7 @@ brew install --cask --adopt whatsapp || true
 brew install --cask --adopt vlc || true
 brew install --cask --adopt screen-studio || true
 brew install --cask --adopt claude-code || true
+brew install --cask --adopt karabiner-elements || true
 
 echo "🍺 Setting up brew autoupdate..."
 brew tap homebrew/autoupdate
