@@ -43,6 +43,15 @@ echo "🐾 Installing herdr agent integrations..."
 herdr integration install claude   || true
 herdr integration install opencode || true
 
+# Claude statusline: stowed script + portable settings.json reference (per-machine file)
+echo "📊 Wiring Claude statusline..."
+SETTINGS="$HOME/.claude/settings.json"
+mkdir -p "$HOME/.claude"
+[ -f "$SETTINGS" ] || echo '{}' > "$SETTINGS"
+tmp=$(mktemp)
+jq '.statusLine = {type:"command", command:"bash ~/.claude/statusline-command.sh"}' \
+  "$SETTINGS" > "$tmp" && mv "$tmp" "$SETTINGS"
+
 echo "🦇 Building bat cache..."
 bat cache --build
 
