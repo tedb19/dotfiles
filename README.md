@@ -43,3 +43,6 @@ Raycast hotkeys live in an encrypted local store (`~/Library/Application Support
 ### herdr
 - Agent integrations are installed by `quickstart.sh` (`herdr integration install claude|opencode`); the Claude hooks land outside the stow tree, per machine.
 - The single-key prefix (Caps Lock) depends on the Karabiner setup above.
+
+### Claude Code statusline
+- The statusline script (`.claude/statusline-command.sh`) is stowed into `~/.claude/`, and `quickstart.sh` wires the `statusLine` reference into `~/.claude/settings.json` with a portable `~` path. No manual step.
