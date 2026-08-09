@@ -1,13 +1,14 @@
 #!/usr/bin/env bash
-# Claude Code status line — mirrors Starship/Catppuccin Macchiato style
+# Claude Code status line
 # Format: ~/dir on  branch [status]  vX.Y.Z | Model (1M context) | 661.1k | 66%
-# Catppuccin Macchiato palette (ANSI approximations)
-LAVENDER_B='\033[1;38;2;183;189;248m'    # #b7bdf8 — git branch (bold)
-RED='\033[38;2;237;135;150m'             # #ed8796 — git status / high context
-YELLOW='\033[38;2;238;212;159m'          # #eed49f — context usage
-GRAY='\033[38;2;128;135;162m'            # #8087a2 — overlay1 / dim info
-WHITE='\033[38;2;202;211;245m'           # #cad3f5 — text
-WHITE_B='\033[1;38;2;202;211;245m'       # #cad3f5 — text (bold)
+# Palette sampled from the mini's statusline
+DIR_B='\033[1;38;2;215;215;252m'      # #d7d7fc — directory (bold)
+BRANCH_B='\033[1;38;2;209;177;250m'   # #d1b1fa — git branch (bold)
+RED='\033[38;2;237;135;150m'          # #ed8796 — git status / high context
+TEAL='\033[38;2;183;214;214m'         # #b7d6d6 — version / model
+PEACH_B='\033[1;38;2;249;216;180m'    # #f9d8b4 — tokens / context percent (bold)
+ON='\033[38;2;167;173;198m'           # #a7adc6 — "on"
+GRAY='\033[38;2;123;124;157m'         # #7b7c9d — pipe separators
 RESET='\033[0m'
 
 input=$(cat)
@@ -40,13 +41,13 @@ fi
 short_cwd="${cwd/#$HOME/~}"
 
 # Left segment: ~/dir on  branch [status]
-printf -v left "%b%s%b" "$WHITE_B" "$short_cwd" "$RESET"
+printf -v left "%b%s%b" "$DIR_B" "$short_cwd" "$RESET"
 
 if [ -n "$branch" ]; then
   printf -v left "%s %bon%b %b %s%b" \
     "$left" \
-    "$GRAY" "$RESET" \
-    "$LAVENDER_B" "$branch" "$RESET"
+    "$ON" "$RESET" \
+    "$BRANCH_B" "$branch" "$RESET"
   if [ -n "$git_status_str" ]; then
     printf -v left "%s %b[%s]%b" "$left" "$RED" "$git_status_str" "$RESET"
   fi
@@ -57,14 +58,14 @@ sep=" ${GRAY}|${RESET} "
 parts=()
 
 if [ -n "$version" ]; then
-  parts+=("${WHITE}v${version}${RESET}")
+  parts+=("${TEAL}v${version}${RESET}")
 fi
 if [ -n "$model" ]; then
   model_str="$model"
   if [ "$ctx_size" = "1000000" ]; then
     model_str+=" (1M context)"
   fi
-  parts+=("${GRAY}${model_str}${RESET}")
+  parts+=("${TEAL}${model_str}${RESET}")
 fi
 if [ -n "$tokens" ]; then
   if [ "$tokens" -ge 1000 ] 2>/dev/null; then
@@ -72,12 +73,12 @@ if [ -n "$tokens" ]; then
   else
     tok_fmt="${tokens}"
   fi
-  parts+=("${WHITE_B}${tok_fmt}${RESET}")
+  parts+=("${PEACH_B}${tok_fmt}${RESET}")
 fi
 if [ -n "$used" ]; then
   used_int=${used%.*}
   if [ "$used_int" -ge 80 ]; then ctx_color="$RED"
-  else                            ctx_color="$YELLOW"
+  else                            ctx_color="$PEACH_B"
   fi
   parts+=("${ctx_color}${used_int}%${RESET}")
 fi
