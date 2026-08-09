@@ -1,20 +1,23 @@
 #!/usr/bin/env bash
 # Claude Code status line — mirrors Starship/Catppuccin Macchiato style
+# Format: ~/dir on  branch [status]  vX.Y.Z | Model (1M context) | 661.1k | 66%
 # Catppuccin Macchiato palette (ANSI approximations)
-LAVENDER='\033[38;2;183;189;248m'   # #b7bdf8 — directory
-MAUVE='\033[38;2;198;160;246m'      # #c6a0f6 — git branch
-RED='\033[38;2;237;135;150m'        # #ed8796 — git status / dirty
-PEACH='\033[38;2;245;169;127m'      # #f5a97f — separators / accents
-GRAY='\033[38;2;128;135;162m'       # #8087a2 — overlay1 / dim info
-WHITE='\033[38;2;202;211;245m'      # #cad3f5 — text
+LAVENDER_B='\033[1;38;2;183;189;248m'    # #b7bdf8 — git branch (bold)
+RED='\033[38;2;237;135;150m'             # #ed8796 — git status / high context
+YELLOW='\033[38;2;238;212;159m'          # #eed49f — context usage
+GRAY='\033[38;2;128;135;162m'            # #8087a2 — overlay1 / dim info
+WHITE='\033[38;2;202;211;245m'           # #cad3f5 — text
+WHITE_B='\033[1;38;2;202;211;245m'       # #cad3f5 — text (bold)
 RESET='\033[0m'
 
 input=$(cat)
 
-cwd=$(echo "$input"       | jq -r '.workspace.current_dir // .cwd')
-model=$(echo "$input"     | jq -r '.model.display_name // ""')
-used=$(echo "$input"      | jq -r '.context_window.used_percentage // empty')
-tokens=$(echo "$input"    | jq -r '.context_window.total_input_tokens // empty')
+cwd=$(echo "$input"      | jq -r '.workspace.current_dir // .cwd')
+model=$(echo "$input"    | jq -r '.model.display_name // ""')
+version=$(echo "$input"  | jq -r '.version // ""')
+used=$(echo "$input"     | jq -r '.context_window.used_percentage // empty')
+tokens=$(echo "$input"   | jq -r '.context_window.total_input_tokens // empty')
+ctx_size=$(echo "$input" | jq -r '.context_window.context_window_size // empty')
 branch=""
 git_status_str=""
 
@@ -36,32 +39,32 @@ fi
 # Shorten home directory
 short_cwd="${cwd/#$HOME/~}"
 
-# Build left segment: dir  branch [status]
-left=""
-printf -v left "%b%s%b" "$LAVENDER" "$short_cwd" "$RESET"
+# Left segment: ~/dir on  branch [status]
+printf -v left "%b%s%b" "$WHITE_B" "$short_cwd" "$RESET"
 
 if [ -n "$branch" ]; then
-  printf -v left "%s %bon %b %b%s%b" \
+  printf -v left "%s %bon%b %b %s%b" \
     "$left" \
-    "$WHITE" "$RESET" \
-    "$MAUVE" "$branch" "$RESET"
+    "$GRAY" "$RESET" \
+    "$LAVENDER_B" "$branch" "$RESET"
   if [ -n "$git_status_str" ]; then
     printf -v left "%s %b[%s]%b" "$left" "$RED" "$git_status_str" "$RESET"
   fi
 fi
 
-# Build right segment: model  context%
-right=""
-if [ -n "$model" ]; then
-  printf -v right "%b%s%b" "$GRAY" "$model" "$RESET"
+# Right segment: vX.Y.Z | Model (1M context) | tokens | percent
+sep=" ${GRAY}|${RESET} "
+parts=()
+
+if [ -n "$version" ]; then
+  parts+=("${WHITE}v${version}${RESET}")
 fi
-if [ -n "$used" ]; then
-  used_int=${used%.*}
-  if   [ "$used_int" -ge 80 ]; then ctx_color="$RED"
-  elif [ "$used_int" -ge 50 ]; then ctx_color="$PEACH"
-  else                               ctx_color="$GRAY"
+if [ -n "$model" ]; then
+  model_str="$model"
+  if [ "$ctx_size" = "1000000" ]; then
+    model_str+=" (1M context)"
   fi
-  printf -v right "%s %b%s%%%b" "$right" "$ctx_color" "$used_int" "$RESET"
+  parts+=("${GRAY}${model_str}${RESET}")
 fi
 if [ -n "$tokens" ]; then
   if [ "$tokens" -ge 1000 ] 2>/dev/null; then
@@ -69,7 +72,19 @@ if [ -n "$tokens" ]; then
   else
     tok_fmt="${tokens}"
   fi
-  printf -v right "%s %b%s%b" "$right" "$PEACH" "$tok_fmt" "$RESET"
+  parts+=("${WHITE_B}${tok_fmt}${RESET}")
+fi
+if [ -n "$used" ]; then
+  used_int=${used%.*}
+  if [ "$used_int" -ge 80 ]; then ctx_color="$RED"
+  else                            ctx_color="$YELLOW"
+  fi
+  parts+=("${ctx_color}${used_int}%${RESET}")
 fi
 
-printf "%s  %s\n" "$left" "$right"
+right=""
+for p in "${parts[@]}"; do
+  if [ -z "$right" ]; then right="$p"; else right+="${sep}${p}"; fi
+done
+
+printf "%s  %b\n" "$left" "$right"
