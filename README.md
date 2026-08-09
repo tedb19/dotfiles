@@ -55,5 +55,7 @@ Local Whisper transcription with a push-to-talk hotkey. Transcribed text is past
 
 Settings live in app preferences (per-machine), so there's nothing to stow.
 
+**Clamshell gotcha:** with the MacBook lid closed (external display), the built-in mic captures pure silence - Whisper then transcribes every recording as "you". Open the lid, or switch the app's microphone to AirPods / iPhone (Continuity) when docked.
+
 ### Claude Code statusline
 - The statusline script (`.claude/statusline-command.sh`) is stowed into `~/.claude/`, and `quickstart.sh` wires the `statusLine` reference into `~/.claude/settings.json` with a portable `~` path. No manual step.
