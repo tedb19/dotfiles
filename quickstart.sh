@@ -29,6 +29,7 @@ brew install --cask --adopt vlc || true
 brew install --cask --adopt screen-studio || true
 brew install --cask --adopt claude-code || true
 brew install --cask --adopt karabiner-elements || true
+brew install --cask --adopt opensuperwhisper || true
 
 echo "🍺 Setting up brew autoupdate..."
 brew tap homebrew/autoupdate

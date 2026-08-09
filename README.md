@@ -44,5 +44,18 @@ Raycast hotkeys live in an encrypted local store (`~/Library/Application Support
 - Agent integrations are installed by `quickstart.sh` (`herdr integration install claude|opencode`); the Claude hooks land outside the stow tree, per machine.
 - The single-key prefix (Caps Lock) depends on the Karabiner setup above.
 
+### OpenSuperWhisper (voice dictation for Claude Code)
+Local Whisper transcription with a push-to-talk hotkey. Transcribed text is pasted into the focused app, so dictating into Claude Code is just: focus the terminal, hold the hotkey, speak, release. Permissions and model download are GUI-only:
+
+1. Launch **OpenSuperWhisper** and approve the **Microphone** permission prompt.
+2. **Privacy & Security → Accessibility**: enable **OpenSuperWhisper** (needed to paste text into the focused app).
+3. In app Settings: download the **Whisper large-v3-turbo** model and select it.
+4. Set the shortcut to **Right Option** and enable **hold-to-record**.
+5. Verify: focus a Ghostty pane running `claude`, hold Right Option, speak, release - the transcript appears at the prompt.
+
+Settings live in app preferences (per-machine), so there's nothing to stow.
+
+**Clamshell gotcha:** with the MacBook lid closed (external display), the built-in mic captures pure silence - Whisper then transcribes every recording as "you". Open the lid, or switch the app's microphone to AirPods / iPhone (Continuity) when docked.
+
 ### Claude Code statusline
 - The statusline script (`.claude/statusline-command.sh`) is stowed into `~/.claude/`, and `quickstart.sh` wires the `statusLine` reference into `~/.claude/settings.json` with a portable `~` path. No manual step.
