@@ -37,6 +37,10 @@ brew autoupdate start --upgrade --cleanup --greedy
 
 echo "🔗 Creating symlinks with stow..."
 cd "$(dirname "$0")"
+# Keep ~/.claude and ~/.claude/skills real dirs so stow links per-file (incl. global
+# skills like lavish-plan) instead of folding the dir into one symlink into the repo,
+# which would make the later `npx skills add -g` herdr step write into the repo tree.
+mkdir -p "$HOME/.claude/skills"
 stow -t ~ .
 
 # herdr agent-state integrations (per-machine: claude hooks live outside the stow tree)
@@ -72,6 +76,11 @@ asdf plugin add nodejs https://github.com/asdf-vm/asdf-nodejs.git || true
 asdf install nodejs latest
 asdf set -u nodejs latest
 
+# Global npm CLI tools (need node from asdf above)
+echo "📦 Installing global npm CLI tools..."
+npm install -g lavish-axi
+asdf reshim nodejs
+
 # asdf Elixir (Erlang is a prerequisite)
 echo "💧 Installing Erlang and Elixir via asdf..."
 asdf plugin add erlang https://github.com/asdf-vm/asdf-erlang.git || true
@@ -98,7 +107,7 @@ asdf set -u golang latest
 echo "🥟 Installing bun..."
 curl -fsSL https://bun.sh/install | bash
 
-# herdr agent skill — teaches agents to drive herdr's socket API from inside a pane.
+# herdr agent skill - teaches agents to drive herdr's socket API from inside a pane.
 # Needs node (from asdf above); lands in ~/.agents/skills, symlinked into ~/.claude/skills (outside stow tree).
 echo "🐾 Installing herdr agent skill..."
 npx -y skills add ogulcancelik/herdr --skill herdr -g || true
