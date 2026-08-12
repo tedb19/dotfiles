@@ -1,1 +1,4 @@
 **/.claude/settings.local.json
+
+# Lavish review artifacts (lavish-plan skill): local only, never committed
+.lavish/
