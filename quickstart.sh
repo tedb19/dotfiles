@@ -107,6 +107,10 @@ asdf set -u golang latest
 echo "🥟 Installing bun..."
 curl -fsSL https://bun.sh/install | bash
 
+# pi coding agent (per-machine binary; OpenRouter auth via `pi` -> /login openrouter)
+echo "🥧 Installing pi coding agent..."
+curl -fsSL https://pi.dev/install.sh | sh
+
 # herdr agent skill - teaches agents to drive herdr's socket API from inside a pane.
 # Needs node (from asdf above); lands in ~/.agents/skills, symlinked into ~/.claude/skills (outside stow tree).
 echo "🐾 Installing herdr agent skill..."
