@@ -11,6 +11,11 @@ test.sh
 # Sensitive files
 .config/gh/hosts.yml
 
+# pi coding agent (secrets + runtime cache; stow-managed dir)
+.pi/agent/auth.json
+.pi/agent/models-store.json
+.pi/agent/*.log
+
 # Herdr runtime files
 .config/herdr/*.log
 .config/herdr/*.sock
