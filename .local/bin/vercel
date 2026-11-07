@@ -1,0 +1,101 @@
+#!/bin/sh
+# vercel: pick the Vercel CLI login by directory (tedb19/dotfiles#21).
+#
+#   ~/Area51/Converge Catalysts/...  -> --global-config ~/.config/vercel/converge
+#   ~/Area51/Maiven/...              -> --global-config ~/.config/vercel/maiven
+#   anywhere else                    -> plain CLI (default login)
+#
+# The directory is $PWD, or the target of --cwd when one is given. A missing
+# login dir is an error; this never falls back to another account. A login dir
+# without credentials is also an error, except for `vercel login`. An explicit
+# -Q/--global-config passes through unchanged.
+set -eu
+
+# Real CLI: first `vercel` on PATH that is not this script, else Homebrew's.
+real=
+IFS_save=$IFS
+IFS=:
+for dir in $PATH; do
+  cand=${dir:-.}/vercel
+  # -ef (same file, symlinks followed) is not strict POSIX but is supported by
+  # macOS /bin/sh, bash, dash, zsh and busybox.
+  # shellcheck disable=SC3013
+  if [ -f "$cand" ] && [ -x "$cand" ] && ! [ "$cand" -ef "$0" ]; then
+    real=$cand
+    break
+  fi
+done
+IFS=$IFS_save
+[ -n "$real" ] || real=/opt/homebrew/bin/vercel
+if ! [ -x "$real" ]; then
+  echo "vercel wrapper: real vercel CLI not found on PATH or at $real" >&2
+  exit 127
+fi
+
+# Scan args for an explicit login dir and for --cwd (stop at --).
+target=${PWD:-$(pwd)}
+prev=
+for arg in "$@"; do
+  if [ "$prev" = cwd ]; then
+    target=$arg
+    prev=
+    continue
+  fi
+  case $arg in
+    --) break ;;
+    -Q | -Q* | --global-config | --global-config=*) exec "$real" "$@" ;;
+    --cwd) prev=cwd ;;
+    --cwd=*) target=${arg#--cwd=} ;;
+  esac
+done
+case $target in
+  /*) ;;
+  *) target=${PWD:-$(pwd)}/$target ;;
+esac
+
+profile_for() {
+  case "$1/" in
+    "$HOME/Area51/Converge Catalysts/"*) echo converge ;;
+    "$HOME/Area51/Maiven/"*) echo maiven ;;
+  esac
+}
+
+profile=$(profile_for "$target")
+if [ -z "$profile" ] && phys=$(cd "$target" 2>/dev/null && pwd -P); then
+  profile=$(profile_for "$phys")
+fi
+
+[ -n "$profile" ] || exec "$real" "$@"
+
+config="$HOME/.config/vercel/$profile"
+if ! [ -d "$config" ]; then
+  {
+    echo "vercel wrapper: no $profile login at $config."
+    echo "Refusing to fall back to another account. Log in from inside this tree:"
+    echo "  mkdir -p \"$config\" && vercel login"
+  } >&2
+  exit 1
+fi
+
+# With no credentials the CLI starts a login on its own (TTY or agent shell),
+# which signs in whatever account the browser holds. Only allow that through an
+# explicit `vercel login` (or --token / help); credStorage=keyring keeps no
+# auth.json, so leave that case to the CLI.
+if ! [ -f "$config/auth.json" ] &&
+  ! grep -qs '"credStorage"[[:space:]]*:[[:space:]]*"keyring"' "$config/config.json"; then
+  explicit=
+  for arg in "$@"; do
+    case $arg in
+      login | --token | --token=* | -t | -t* | -h | --help) explicit=1 ;;
+    esac
+  done
+  if [ -z "$explicit" ]; then
+    {
+      echo "vercel wrapper: not logged in to $profile ($config has no auth.json)."
+      echo "Log in from inside this tree with the $profile account: vercel login"
+    } >&2
+    exit 1
+  fi
+fi
+
+exec "$real" --global-config "$config" "$@"

@@ -23,6 +23,12 @@ Some steps can't be scripted (macOS security prompts, credential logins, GUI-onl
 ### GitHub CLI
 - `gh auth login` — credentials (`.config/gh/hosts.yml`) are gitignored, so auth is per-machine.
 
+### Vercel CLI (login per company)
+`~/.local/bin/vercel` (stowed from `.local/bin/vercel`) wraps the Homebrew CLI and picks the login by directory: `~/Area51/Converge Catalysts/` uses `~/.config/vercel/converge`, `~/Area51/Maiven/` uses `~/.config/vercel/maiven`, anywhere else the default login. A missing login dir, or one with no credentials yet, errors instead of using the other account or auto-starting a login; an explicit `-Q/--global-config` passes through. `.zshenv` puts `~/.local/bin` first on PATH for non-interactive shells too.
+
+- Per machine, log in once inside each tree: `mkdir -p ~/.config/vercel/<converge|maiven>`, then `vercel login` from a directory in that tree.
+- Check: `vercel whoami` in each tree.
+
 ### Karabiner-Elements (Caps Lock → F18, herdr prefix)
 Karabiner needs OS permissions and a privileged daemon that only start after approval + reboot. Without these, the Caps Lock remap silently does nothing.
 
