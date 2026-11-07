@@ -53,16 +53,27 @@ case $target in
   *) target=${PWD:-$(pwd)}/$target ;;
 esac
 
+lower() { printf '%s' "$1" | tr '[:upper:]' '[:lower:]'; }
+home_l=$(lower "$HOME")
+
+# Case-insensitive: the macOS volume is, so ~/area51/maiven is the Maiven tree.
 profile_for() {
-  case "$1/" in
-    "$HOME/Area51/Converge Catalysts/"*) echo converge ;;
-    "$HOME/Area51/Maiven/"*) echo maiven ;;
+  case "$(lower "$1")/" in
+    "$home_l/area51/converge catalysts/"*) echo converge ;;
+    "$home_l/area51/maiven/"*) echo maiven ;;
   esac
 }
 
-profile=$(profile_for "$target")
-if [ -z "$profile" ] && phys=$(cd "$target" 2>/dev/null && pwd -P); then
-  profile=$(profile_for "$phys")
+# Match the logical path with .. resolved (cd + pwd), then the physical one
+# (symlinks resolved); the raw text only when the directory does not exist.
+profile=
+if norm=$(cd "$target" 2>/dev/null && pwd); then
+  profile=$(profile_for "$norm")
+  if [ -z "$profile" ] && phys=$(cd "$target" 2>/dev/null && pwd -P); then
+    profile=$(profile_for "$phys")
+  fi
+else
+  profile=$(profile_for "$target")
 fi
 
 [ -n "$profile" ] || exec "$real" "$@"
@@ -74,6 +85,15 @@ if ! [ -d "$config" ]; then
     echo "Refusing to fall back to another account. Log in from inside this tree:"
     echo "  mkdir -p \"$config\" && vercel login"
   } >&2
+  exit 1
+fi
+
+# An exported VERCEL_TOKEN would override the per-tree login silently.
+if [ -n "${VERCEL_TOKEN:-}" ]; then
+  echo "vercel wrapper: VERCEL_TOKEN is set; it would override the $profile login. Unset it, or pass --token explicitly." >&2
+  for arg in "$@"; do
+    case $arg in --token | --token=* | -t | -t*) exec "$real" "$@" ;; esac
+  done
   exit 1
 fi
 
