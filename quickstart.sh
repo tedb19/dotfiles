@@ -41,6 +41,9 @@ cd "$(dirname "$0")"
 # skills like lavish-plan) instead of folding the dir into one symlink into the repo,
 # which would make the later `npx skills add -g` herdr step write into the repo tree.
 mkdir -p "$HOME/.claude/skills"
+# Same for ~/.local/bin: stow links the vercel wrapper (#21) into it per-file, so
+# installers (uv, etc.) that write there do not land in the repo.
+mkdir -p "$HOME/.local/bin"
 stow -t ~ .
 
 # herdr agent-state integrations (per-machine: claude hooks live outside the stow tree)

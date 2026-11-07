@@ -28,8 +28,8 @@ eval "$(zoxide init zsh)"
 # fzf
 source <(fzf --zsh)
 
-# asdf
-. /opt/homebrew/opt/asdf/libexec/asdf.sh
+# asdf (0.16+ is a single binary with no asdf.sh; tools resolve through its shims)
+export PATH="${ASDF_DATA_DIR:-$HOME/.asdf}/shims:$PATH"
 
 # bun completions
 [ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"

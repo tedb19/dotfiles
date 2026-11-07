@@ -10,6 +10,8 @@ test.sh
 
 # Sensitive files
 .config/gh/hosts.yml
+# Vercel CLI logins per company (auth tokens; ~/.config is the stowed repo dir, #21)
+.config/vercel/
 
 # pi coding agent (secrets + runtime cache; stow-managed dir)
 .pi/agent/auth.json
