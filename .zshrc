@@ -46,6 +46,11 @@ case ":$PATH:" in
 esac
 # pnpm end
 
+# ~/.local/bin back in front: asdf, bun and pnpm above prepend themselves, and
+# the asdf vercel shim would otherwise bypass the per-directory wrapper (#21).
+typeset -U path
+path=("$HOME/.local/bin" $path)
+
 #
 # bindkey "\e\e[b" backward-word
 # bindkey '\e\e[f' forward-word
