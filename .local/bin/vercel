@@ -3,7 +3,8 @@
 #
 #   ~/Area51/Converge Catalysts/...  -> --global-config ~/.config/vercel/converge
 #   ~/Area51/Maiven/...              -> --global-config ~/.config/vercel/maiven
-#   anywhere else                    -> plain CLI (default login)
+#   anywhere else                    -> --global-config ~/.config/vercel/personal
+#                                       (plain CLI when that dir does not exist)
 #
 # The directory is $PWD, or the target of --cwd when one is given. A missing
 # login dir is an error; this never falls back to another account. A login dir
@@ -76,7 +77,10 @@ else
   profile=$(profile_for "$target")
 fi
 
-[ -n "$profile" ] || exec "$real" "$@"
+if [ -z "$profile" ]; then
+  [ -d "$HOME/.config/vercel/personal" ] || exec "$real" "$@"
+  profile=personal
+fi
 
 config="$HOME/.config/vercel/$profile"
 if ! [ -d "$config" ]; then

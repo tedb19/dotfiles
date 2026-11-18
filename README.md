@@ -24,9 +24,9 @@ Some steps can't be scripted (macOS security prompts, credential logins, GUI-onl
 - `gh auth login` — credentials (`.config/gh/hosts.yml`) are gitignored, so auth is per-machine.
 
 ### Vercel CLI (login per company)
-`~/.local/bin/vercel` (stowed from `.local/bin/vercel`) wraps the Homebrew CLI and picks the login by directory: `~/Area51/Converge Catalysts/` uses `~/.config/vercel/converge`, `~/Area51/Maiven/` uses `~/.config/vercel/maiven`, anywhere else the default login. A missing login dir, or one with no credentials yet, errors instead of using the other account or auto-starting a login; an explicit `-Q/--global-config` passes through. `.zshenv` puts `~/.local/bin` first on PATH for non-interactive shells too.
+`~/.local/bin/vercel` (stowed from `.local/bin/vercel`) wraps the Homebrew CLI and picks the login by directory: `~/Area51/Converge Catalysts/` uses `~/.config/vercel/converge`, `~/Area51/Maiven/` uses `~/.config/vercel/maiven`, anywhere else `~/.config/vercel/personal` (the default login when that dir does not exist). A missing login dir, or one with no credentials yet, errors instead of using the other account or auto-starting a login; an explicit `-Q/--global-config` passes through. `.zshenv` puts `~/.local/bin` first on PATH for non-interactive shells, and `.zshrc` moves it back in front after asdf, bun and pnpm prepend their own dirs (the asdf `vercel` shim would otherwise win).
 
-- Per machine, log in once inside each tree: `mkdir -p ~/.config/vercel/<converge|maiven>`, then `vercel login` from a directory in that tree.
+- Per machine, log in once inside each tree: `mkdir -p ~/.config/vercel/<converge|maiven|personal>`, then `vercel login` from a directory in that tree.
 - Check: `vercel whoami` in each tree.
 
 ### Karabiner-Elements (Caps Lock → F18, herdr prefix)
